@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Para você ❤️</title>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #222;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff6b81;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(255, 107, 129, 0.5);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 15px 15px 30px;
+      width: 280px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      position: relative;
+      transform: rotate(-5deg);
+      transition: transform 0.3s;
+      color: #333;
+    }
+
+    .polaroid:nth-child(even) {
+      transform: rotate(3deg);
+    }
+
+    .polaroid:hover {
+      transform: rotate(0) scale(1.05);
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .polaroid p {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .toggle-poesia {
+      cursor: pointer;
+      color: #ff6b81;
+      margin-bottom: 5px;
+    }
+
+    .poesia {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      font-style: italic;
+      color: #555;
+    }
+
+    .poesia.show {
+      max-height: 200px;
+    }
+
+    .textinho {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    /* Estilo da cartinha */
+    .cartinha-container {
+      background: white;
+      color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      box-shadow: 0 0 20px rgba(255, 107, 129, 0.3);
+      margin-bottom: 40px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .cartinha-container h2 {
+      color: #d6336c;
+      margin-bottom: 10px;
+    }
+
+    .cartinha-mensagem {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.6s ease, opacity 0.6s ease;
+    }
+
+    .cartinha-container.aberta .cartinha-mensagem {
+      max-height: 300px;
+      opacity: 1;
+      margin-top: 10px;
+    }
+
+    @keyframes subir {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .cora {
+      position: fixed;
+      bottom: -50px;
+      font-size: 20px;
+      animation: subir linear infinite;
+      z-index: -1;
+    }
+
+    .cora:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+    .cora:nth-child(2) { left: 20%; animation-duration: 10s; animation-delay: 2s; }
+    .cora:nth-child(3) { left: 35%; animation-duration: 7s; animation-delay: 1s; }
+    .cora:nth-child(4) { left: 50%; animation-duration: 9s; animation-delay: 3s; }
+    .cora:nth-child(5) { left: 65%; animation-duration: 11s; animation-delay: 0s; }
+    .cora:nth-child(6) { left: 80%; animation-duration: 6s; animation-delay: 2s; }
+  </style>
+</head>
+<body>
+  <h1>Para minha futura namorada 💕</h1>
+
+  <div class="gallery">
+    <div class="polaroid">
+      <img src="gatinho.jpeg" alt="Foto 1">
+      <p>Nós ❤️</p>
+      <div class="toggle-poesia"><span class="seta">⬇️</span></div>
+      <div class="poesia">
+        <p>
+          Te encontrei e encontrei a paz,<br>
+          Com você o mundo é mais bonito,<br>
+          O amor sorriu pra mim em tua voz,<br>
+          E agora meu caminho é contigo.
+        </p>
+      </div>
+    </div>
+
+    <div class="polaroid">
+      <img src="beijinho.jpeg" alt="Foto 2">
+      <p>Prometo um mundo tranquilo</p>
+      <div class="toggle-poesia"><span class="seta">⬇️</span></div>
+      <div class="poesia">
+        <p>
+          Prometo um mundo tranquilo,<br>
+          Beijos dados sem pressa.<br>
+          E um amor tão singelo,<br>
+          Que só a vida confessa.
+        </p>
+      </div>
+    </div>
+
+    <div class="polaroid">
+      <img src="abraçandinho.png" alt="Foto 3">
+      <p>Nos teus sorrisos</p>
+      <div class="toggle-poesia"><span class="seta">⬇️</span></div>
+      <div class="poesia">
+        <p>
+          Não foi preciso muito.<br>
+          Teus sorrisos simples e teus olhares calmos<br>
+          foram o suficiente.<br>
+          Ali, sem pressa nem alarde,<br>
+          meu coração te escolheu.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="textinho">
+    <p>
+      Desde que te conheci, tudo ficou mais bonito. Este site é só um jeitinho de mostrar o quanto você é especial pra mim. 💌
+    </p>
+  </div>
+
+  <div class="cartinha-container" onclick="this.classList.toggle('aberta')">
+    <h2>Clique para abrir a cartinha 💌</h2>
+    <div class="cartinha-mensagem">
+      <p>
+        Dá uma olhadinha na sua steam, </p>
+        Espero que você goste! </p>
+        ❤️❤️❤️❤️❤️❤️❤️❤️❤️
+      </p>
+    </div>
+  </div>
+
+  <!-- Corações flutuantes -->
+  <div class="cora">❤️</div>
+  <div class="cora">💖</div>
+  <div class="cora">💕</div>
+  <div class="cora">💘</div>
+  <div class="cora">💝</div>
+  <div class="cora">❤️</div>
+
+  <script>
+    const botoes = document.querySelectorAll('.toggle-poesia');
+    botoes.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const poesia = btn.nextElementSibling;
+        poesia.classList.toggle('show');
+        btn.querySelector('.seta').textContent = poesia.classList.contains('show') ? '⬆️' : '⬇️';
+      });
+    });
+  </script>
+</body>
+</html>

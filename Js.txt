@@ -1,0 +1,45 @@
+// Criar corações subindo
+function criarCoracao() {
+  const coracao = document.createElement("div");
+  coracao.classList.add("cora");
+  coracao.textContent = "❤️";
+
+  // Posição aleatória na horizontal
+  coracao.style.left = Math.random() * 100 + "vw";
+
+  // Tamanho e duração aleatórios
+  const duracao = Math.random() * 5 + 3; // 3s a 8s
+  coracao.style.animationDuration = `${duracao}s`;
+  coracao.style.fontSize = Math.random() * 20 + 20 + "px"; // 20px a 40px
+
+  document.body.appendChild(coracao);
+
+  // Remover após a animação
+  setTimeout(() => {
+    coracao.remove();
+  }, duracao * 1000);
+}
+
+// Criar um coração a cada 300ms
+setInterval(criarCoracao, 300);
+
+ // Mostrar/ocultar poesias
+  document.querySelectorAll('.toggle-poesia').forEach(toggle => {
+    toggle.addEventListener('click', function() {
+      const poesia = this.nextElementSibling;
+      const seta = this.querySelector('.seta');
+      
+      poesia.classList.toggle('mostrar');
+      seta.classList.toggle('girada');
+    });
+  });
+
+// Mostrar chave do presente
+function mostrarPresente() {
+  const tampa = document.getElementById('tampa');
+  const chave = document.getElementById('chave');
+
+  // Abre a tampa e mostra a chave
+  tampa.classList.add('aberta');
+  chave.classList.add('mostrar');
+}

@@ -1,0 +1,243 @@
+/* Fonte personalizada */
+@font-face {
+  font-family: 'LoveTwist';
+  src: url('fonts/Love Twist Sans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #ffd7e3;
+  text-align: center;
+  padding: 20px;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-family: 'LoveTwist', cursive;
+  font-size: 36px;
+  color: #d6336c;
+  text-shadow: 2px 2px 4px rgba(214, 51, 108, 0.3);
+  margin-bottom: 30px;
+}
+
+/* Galeria de Polaroids */
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+.polaroid {
+  background-color: white;
+  padding: 15px 15px 20px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+  border-radius: 2px;
+  width: 220px;
+  position: relative;
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.polaroid:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Imagem da Polaroid */
+.polaroid img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 1px solid #f5f5f5;
+}
+
+/* Texto abaixo da imagem */
+.polaroid p {
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #d6336c;
+}
+
+/* Setinha para mostrar poesia */
+.toggle-poesia {
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: #ff758f;
+  transition: transform 0.3s;
+}
+
+.toggle-poesia:hover {
+  transform: scale(1.2);
+}
+
+.seta {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.seta.girada {
+  transform: rotate(180deg);
+}
+
+/* Poesia (oculta por padrão) */
+.poesia {
+  max-height: 0;
+  overflow: hidden;
+  font-size: 14px;
+  padding: 0 10px;
+  background-color: #ffe9f0;
+  border-radius: 8px;
+  margin-top: 5px;
+  text-align: center;
+  line-height: 1.6;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
+
+.poesia.mostrar {
+  max-height: 200px;
+  padding: 10px;
+}
+
+/* Texto principal */
+.textinho {
+  margin: 30px 0;
+  font-size: 18px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  color: #8a4a58;
+}
+
+/* Container do presente */
+.presente-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 60px auto;
+  cursor: pointer;
+}
+
+.caixa {
+  width: 100%;
+  height: 100%;
+  background: #d63384;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 0;
+}
+
+.tampa {
+  width: 100%;
+  height: 40px;
+  background: #c1126f;
+  position: absolute;
+  top: 0;
+  border-radius: 10px 10px 0 0;
+  transition: transform 0.6s ease;
+  transform-origin: top center;
+  z-index: 2;
+}
+
+.tampa.aberta {
+  transform: rotateX(100deg);
+}
+
+.chave {
+  opacity: 0;
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 10px 15px;
+  border: 2px solid #c1126f;
+  border-radius: 8px;
+  color: #c1126f;
+  font-size: 14px;
+  transition: opacity 1s ease;
+}
+
+.chave.mostrar {
+  opacity: 1;
+}
+
+.volta {
+  border: 8px solid #ffd700;
+  width: 60px;
+  height: 30px;
+  border-radius: 50% / 100% 50% 50% 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.volta.esquerda {
+  transform: rotateY(180deg);
+}
+
+/* Conteúdo do presente */
+.conteudo-presente {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 60px;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  transition: opacity 0.5s ease 0.5s;
+}
+
+.presente.aberto .conteudo-presente {
+  opacity: 1;
+}
+
+.chave {
+  color: #d6336c;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Corações subindo */
+@keyframes flutuar {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.cora {
+  position: fixed;
+  bottom: 0;
+  left: calc(10% + 80px * var(--i));
+  font-size: 24px;
+  animation: flutuar 8s linear infinite;
+  animation-delay: calc(0.5s * var(--i));
+  color: #ff4d6d;
+  pointer-events: none;
+  z-index: 0;
+  text-shadow: 0 0 5px rgba(255, 77, 109, 0.5);
+}

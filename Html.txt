@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Para você ❤️</title>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #222;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff6b81;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(255, 107, 129, 0.5);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 15px 15px 30px;
+      width: 280px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      position: relative;
+      transform: rotate(-5deg);
+      transition: transform 0.3s;
+      color: #333;
+    }
+
+    .polaroid:nth-child(even) {
+      transform: rotate(3deg);
+    }
+
+    .polaroid:hover {
+      transform: rotate(0) scale(1.05);
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .polaroid p {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .toggle-poesia {
+      cursor: pointer;
+      color: #ff6b81;
+      margin-bottom: 5px;
+    }
+
+    .poesia {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      font-style: italic;
+      color: #555;
+    }
+
+    .poesia.show {
+      max-height: 200px;
+    }
+
+    .textinho {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    /* Estilo do presente */
+    .presente-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .presente {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s ease;
+    }
+
+    .presente.aberto {
+      transform: translateY(-50px) rotateX(-120deg);
+    }
+
+    .caixa {
+      width: 180px;
+      height: 120px;
+      background: crimson;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      border-radius: 0 0 10px 10px;
+      transform-origin: bottom;
+      transition: all 0.5s ease;
+    }
+
+    .fita {
+      background: gold;
+    }
+
+    .caixa .fita {
+      width: 60px;
+      height: 100%;
+    }
+
+    .topo {
+      width: 200px;
+      height: 60px;
+      background: crimson;
+      border-radius: 10px;
+      position: absolute;
+      bottom: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      filter: drop-shadow(0 2px 3px);
+      transform-origin: bottom;
+      transition: all 0.5s ease;
+    }
+
+    .topo .fita {
+      width: 80px;
+      height: 100%;
+    }
+
+    .laco {
+      position: absolute;
+      bottom: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .volta {
+      border: 10px solid goldenrod;
+      width: 80px;
+      height: 40px;
+      border-radius: 50% / 100% 50% 50% 0;
+    }
+
+    .volta.esq {
+      transform: rotateY(180deg);
+    }
+
+    .conteudo-presente {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 100px;
+      background: white;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease 0.5s;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .presente.aberto .conteudo-presente {
+      opacity: 1;
+    }
+
+    .chave {
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Corações flutuantes */
+    .cora {
+      position: fixed;
+      bottom: -50px;
+      font-size: 20px;
+      animation: subir linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes subir {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Posicionando os corações */
+    .cora:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+    .cora:nth-child(2) { left: 20%; animation-duration: 10s; animation-delay: 2s; }
+    .cora:nth-child(3) { left: 35%; animation-duration: 7s; animation-delay: 1s; }
+    .cora:nth-child(4) { left: 50%; animation-duration: 9s; animation-delay: 3s; }
+    .cora:nth-child(5) { left: 65%; animation-duration: 11s; animation-delay: 0s; }
+    .cora:nth-child(6) { left: 80%; animation-duration: 6s; animation-delay: 2s; }
+  </style>
+</head>
+<body>
+  <h1>Para minha futura namorada 💕</h1>
+
+  <div class="gallery">
+    <div class="polaroid">
+      <img src="gatinho.jpeg" alt="Foto 1">
+      <p>Nós ❤️</p>
+      <div class="toggle-poesia"><span class="seta">⬇️</span></div>
+      <div class="poesia">
+        <p>
+          Te encontrei e encontrei a paz,<br>
+          Com você o mundo é mais bonito,<br>
+          O amor sorriu pra mim em tua voz,<br>
+          E agora meu caminho é contigo.
+        </p>
+      </div>
+    </div>
+
+    <div class="polaroid">
+      <img src="foto2.jpg" alt="Foto 2">
+      <p>Te amo!</p>
+      <div class="toggle-poesia"><span class="seta">⬇️</span></div>
+      <div class="poesia">
+        <p>
+          Te amo mais do que palavras dizem,<br>
+          Mais do que os dias podem contar,<br>
+          És meu riso mais sincero,<br>
+          Meu abrigo e meu lar.
+        </p>
+      </div>
+    </div>
+
+    <div class="polaroid">
+      <img src="foto2.jpg" alt="Foto 3">
+      <p>Momentos nossos 💫</p>
+      <div class="toggle-poesia"><span class="seta">⬇️</span></div>
+      <div class="poesia">
+        <p>
+          Cada memória ao teu lado,<br>
+          É um poema que o tempo guardou,<br>
+          E nos olhos teus encantados,<br>
+          Meu coração se apaixonou.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="textinho">
+    <p>
+      Desde que te conheci, tudo ficou mais bonito. Este site é só um jeitinho de mostrar o quanto você é especial pra mim. 💌
+    </p>
+  </div>
+
+  <div class="presente-container" onclick="this.querySelector('.presente').classList.toggle('aberto')">
+    <div class="presente">
+      <div class="caixa">
+        <div class="fita"></div>
+      </div>
+      <div class="topo">
+        <div class="fita"></div>
+      </div>
+      <div class="laco">
+        <div class="volta"></div>
+        <div class="volta esq"></div>
+      </div>
+      <div class="conteudo-presente">
+        <div class="chave">🎁 Sua chave do jogo: <strong>ABCD-EFGH-IJKL</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corações subindo -->
+  <div class="cora" style="--i: 1;">❤️</div>
+  <div class="cora" style="--i: 2;">💖</div>
+  <div class="cora" style="--i: 3;">💘</div>
+  <div class="cora" style="--i: 4;">💕</div>
+  <div class="cora" style="--i: 5;">💗</div>
+  <div class="cora" style="--i: 6;">❤️</div>
+
+  <script>
+    // Adiciona funcionalidade para mostrar/ocultar as poesias
+    document.querySelectorAll('.toggle-poesia').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const poesia = toggle.nextElementSibling;
+        poesia.classList.toggle('show');
+        
+        // Altera a seta
+        const seta = toggle.querySelector('.seta');
+        if (poesia.classList.contains('show')) {
+          seta.textContent = '⬆️';
+        } else {
+          seta.textContent = '⬇️';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
